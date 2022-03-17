@@ -12,7 +12,7 @@ namespace SpecFlowApiTest.Hooks
         [BeforeFeature("AdicionaListaEventos")]
         public static async Task AdicionaListaEventos()
         {
-            var token = Utils.BuscaTokenValido();
+            var token = Utils.BuscaTokenValido(nameof(Configs.TokenA));
 
             var listaEventosData = File.ReadAllText("../../../Data/ListaEventosData.json");
         
