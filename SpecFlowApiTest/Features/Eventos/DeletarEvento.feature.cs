@@ -125,7 +125,7 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 13
- testRunner.Given("que tenho um evento já agendado para o dia \'15\' para ser \'confirmado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que tenho um evento já agendado para o dia \'15\' para ser \'deletado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 14
  testRunner.And("quero deletar esse evento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -143,14 +143,14 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Tentar deletar um evento que nao esta na lista de eventos")]
+        [Xunit.SkippableFactAttribute(DisplayName="Deletar um evento que nao esta na lista de eventos")]
         [Xunit.TraitAttribute("FeatureTitle", "Deletar evento")]
-        [Xunit.TraitAttribute("Description", "Tentar deletar um evento que nao esta na lista de eventos")]
-        public virtual void TentarDeletarUmEventoQueNaoEstaNaListaDeEventos()
+        [Xunit.TraitAttribute("Description", "Deletar um evento que nao esta na lista de eventos")]
+        public virtual void DeletarUmEventoQueNaoEstaNaListaDeEventos()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tentar deletar um evento que nao esta na lista de eventos", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deletar um evento que nao esta na lista de eventos", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 19
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -175,7 +175,7 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 20
- testRunner.Given("que tenho um evento já agendado para o dia \'16\' para ser \'confirmado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que tenho um evento já agendado para o dia \'16\' para ser \'deletado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 21
  testRunner.And("quero tentar deletar esse evento passando id errado", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -188,6 +188,53 @@ this.FeatureBackground();
 #line hidden
 #line 24
  testRunner.And("esse evento ainda está na agenda de eventos da vaivoa", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Deletar um evento que não pertence ao usuario que criou")]
+        [Xunit.TraitAttribute("FeatureTitle", "Deletar evento")]
+        [Xunit.TraitAttribute("Description", "Deletar um evento que não pertence ao usuario que criou")]
+        public virtual void DeletarUmEventoQueNaoPertenceAoUsuarioQueCriou()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Deletar um evento que não pertence ao usuario que criou", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 26
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 8
+this.FeatureBackground();
+#line hidden
+#line 27
+ testRunner.Given("que tenho um evento já agendado para o dia \'17\' para ser \'deletado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line hidden
+#line 28
+ testRunner.And("que quero \'deletar\' esse evento com usuario diferente do que criou", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 29
+ testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line hidden
+#line 30
+ testRunner.Then("retorna uma resposta com o status igual a \'Forbidden\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             }
             this.ScenarioCleanup();

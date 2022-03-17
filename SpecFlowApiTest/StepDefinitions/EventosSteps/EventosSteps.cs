@@ -8,7 +8,7 @@ using SpecFlowApiTest.Support;
 
 namespace SpecFlowApiTest.StepDefinitions.EventosSteps
 {
-    // TODO: Adicionar meio de analisar e validar o body campo a campo quando necessario de respostas de sucesso
+    // TODO: Adicionar meio de analisar e validar o body campo a campo quando necessario das respostas de sucesso
     // TODO: Adicionar um meio de ler e validar o body quando vem erros de validacao 
     [Binding]
     internal class EventosSteps
@@ -47,9 +47,15 @@ namespace SpecFlowApiTest.StepDefinitions.EventosSteps
             Assert.True(bodyResponse.Sucesso);
             Assert.Equal(201, (int)restResponse.StatusCode);
 
+            _scenarioContext["ResponseBody"] = bodyResponse.Resultado;
             _scenarioContext["EventoId"] = bodyResponse.Resultado.Id;
         }
 
+        [Given(@"que quero '([^']*)' esse evento com usuario diferente do que criou")]
+        public void GivenQueQueroEsseEventoComUsuarioDiferenteDoQueCriou(string acao)
+        {
+            _featureContext["token"] = Utils.BuscaTokenValido(nameof(Configs.TokenB));
+        }
 
         #endregion
 
@@ -192,6 +198,45 @@ namespace SpecFlowApiTest.StepDefinitions.EventosSteps
         }
         #endregion
 
+        #region Adicionar evento
+
+        [Given(@"que quero editar o evento com dados validos")]
+        public void GivenQueQueroEditarOEventoComDadosValidos()
+        {
+            var eventoValido = new EventoDtoBuilder().Build();
+
+            _scenarioContext["DataBody"] = eventoValido;
+        }
+
+        [Given(@"que quero editar o evento passando um tipo que nao existe")]
+        public void GivenQueQueroEditarOEventoPassandoUmTipoQueNaoExiste()
+        {
+            var eventoValido = new EventoDtoBuilder().TipoEventoId(Guid.NewGuid().ToString()).Build();
+
+            _scenarioContext["DataBody"] = eventoValido;
+        }
+
+        [Given(@"que quero editar o evento para um horario já ocupado")]
+        public void GivenQueQueroEditarOEventoParaUmHorarioJaOcupado()
+        {
+            var responseAdicao = (CadastroEventoRequestDto)_scenarioContext["ResponseBody"];
+
+            var eventoValido = new EventoDtoBuilder().DataInicio(responseAdicao.Inicio!).DataFim(responseAdicao.Fim!).Build();
+
+            _scenarioContext["DataBody"] = eventoValido;
+        }
+
+        [Given(@"que quero editar uma evento que não existe na agenda")]
+        public void GivenQueQueroEditarUmaEventoQueNaoExisteNaAgenda()
+        {
+            var eventoValido = new EventoDtoBuilder().Build();
+
+            _scenarioContext["DataBody"] = eventoValido;
+            _scenarioContext["EventoId"] = Guid.NewGuid().ToString();
+        }
+
+        #endregion
+
         #region Deletar evento
 
         [Given(@"quero deletar esse evento")]
@@ -252,7 +297,7 @@ namespace SpecFlowApiTest.StepDefinitions.EventosSteps
 
         }
 
-        [Given(@"que já foi finalizado esse evento")]
+        [Given(@"que esse evento ja foi finalizdo")]
         public async Task GivenQueJaFoiFinalizadoEsseEvento()
         {
             var token = (string)_featureContext["token"];

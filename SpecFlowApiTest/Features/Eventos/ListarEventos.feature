@@ -1,4 +1,4 @@
-﻿
+﻿# TODO: Adicionar cenarios de teste usando paginacao e ordenacao
 @AdicionaListaEventos
 Feature: Listar eventos da agenda
 	Como Usuário/Administrador 

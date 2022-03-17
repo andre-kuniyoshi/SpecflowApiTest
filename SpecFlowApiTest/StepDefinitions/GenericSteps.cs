@@ -18,7 +18,7 @@ namespace SpecFlowApiTest.StepDefinitions
         [Given(@"que estou autenticado no sistema")]
         public void GivenQueEstouAutenticadoNoSistema()
         {
-            _featureContext["token"] = Utils.BuscaTokenValido();
+            _featureContext["token"] = Utils.BuscaTokenValido(nameof(Configs.TokenA));
         }
 
         [Given(@"a rota do endpoint é '([^']*)' e o método http é '([^']*)'")]

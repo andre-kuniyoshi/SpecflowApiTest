@@ -175,7 +175,7 @@ this.FeatureBackground();
  testRunner.Given("que tenho um evento já agendado para o dia \'06\' para ser \'confirmado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 20
- testRunner.And("que já foi finalizado esse evento", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.And("que esse evento ja foi finalizdo", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 21
  testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
@@ -187,14 +187,14 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Tentar finalizar um evento com id inexistente")]
+        [Xunit.SkippableFactAttribute(DisplayName="Confirmar a realizacao de um evento com id inexistente")]
         [Xunit.TraitAttribute("FeatureTitle", "Confirmar realizacao de evento")]
-        [Xunit.TraitAttribute("Description", "Tentar finalizar um evento com id inexistente")]
-        public virtual void TentarFinalizarUmEventoComIdInexistente()
+        [Xunit.TraitAttribute("Description", "Confirmar a realizacao de um evento com id inexistente")]
+        public virtual void ConfirmarARealizacaoDeUmEventoComIdInexistente()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tentar finalizar um evento com id inexistente", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Confirmar a realizacao de um evento com id inexistente", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 24
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -234,14 +234,14 @@ this.FeatureBackground();
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Tentar finalizar um evento com link invalido")]
+        [Xunit.SkippableFactAttribute(DisplayName="Confirmar a realizacao de um evento com link invalido")]
         [Xunit.TraitAttribute("FeatureTitle", "Confirmar realizacao de evento")]
-        [Xunit.TraitAttribute("Description", "Tentar finalizar um evento com link invalido")]
-        public virtual void TentarFinalizarUmEventoComLinkInvalido()
+        [Xunit.TraitAttribute("Description", "Confirmar a realizacao de um evento com link invalido")]
+        public virtual void ConfirmarARealizacaoDeUmEventoComLinkInvalido()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tentar finalizar um evento com link invalido", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Confirmar a realizacao de um evento com link invalido", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 30
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
@@ -276,6 +276,53 @@ this.FeatureBackground();
 #line hidden
 #line 34
  testRunner.Then("retorna uma resposta com o status igual a \'BadRequest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
+        
+        [Xunit.SkippableFactAttribute(DisplayName="Confirmar a realizacao de um evento que nao pertence ao usuario")]
+        [Xunit.TraitAttribute("FeatureTitle", "Confirmar realizacao de evento")]
+        [Xunit.TraitAttribute("Description", "Confirmar a realizacao de um evento que nao pertence ao usuario")]
+        public virtual void ConfirmarARealizacaoDeUmEventoQueNaoPertenceAoUsuario()
+        {
+            string[] tagsOfScenario = ((string[])(null));
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Confirmar a realizacao de um evento que nao pertence ao usuario", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 36
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 8
+this.FeatureBackground();
+#line hidden
+#line 37
+ testRunner.Given("que tenho um evento já agendado para o dia \'09\' para ser \'confirmado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+#line hidden
+#line 38
+ testRunner.And("que quero \'finalizar\' esse evento com usuario diferente do que criou", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+#line hidden
+#line 39
+ testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line hidden
+#line 40
+ testRunner.Then("retorna uma resposta com o status igual a \'Forbidden\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             }
             this.ScenarioCleanup();

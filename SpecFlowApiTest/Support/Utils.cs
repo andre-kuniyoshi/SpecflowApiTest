@@ -85,9 +85,9 @@ namespace SpecFlowApiTest.Support
             return await client.ExecuteAsync(request);
         }
 
-        public static string BuscaTokenValido()
+        public static string BuscaTokenValido(string tokenNome)
         {
-            var token = Configs.token;
+            var token = Configs.TokenFactory(tokenNome);
 
             if (String.IsNullOrEmpty(token))
             {
