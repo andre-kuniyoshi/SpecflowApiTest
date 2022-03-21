@@ -35,6 +35,7 @@ Cenario: Confirmar a realizacao de um evento com link invalido
 
 Cenario: Confirmar a realizacao de um evento que nao pertence ao usuario
 	Dado que tenho um evento já agendado para o dia '09' para ser 'confirmado'
+	E quero finalizar esse evento
 	E  que quero 'finalizar' esse evento com usuario diferente do que criou
 	Quando faco a requisição
 	Entao retorna uma resposta com o status igual a 'Forbidden'

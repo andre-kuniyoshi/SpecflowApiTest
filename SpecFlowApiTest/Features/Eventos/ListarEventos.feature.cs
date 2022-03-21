@@ -25,7 +25,7 @@ namespace SpecFlowApiTest.Features.Eventos
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = new string[] {
+        private static string[] featureTags = new string[] {
                 "AdicionaListaEventos"};
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
@@ -43,8 +43,7 @@ namespace SpecFlowApiTest.Features.Eventos
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/Eventos", "Listar eventos da agenda", "\tComo Usuário/Administrador \r\n\tQuero listar um ou mais eventos da agenda usando f" +
-                    "iltros\r\n\tPara obter uma lista filtrada dos eventos da Vaivoa", ProgrammingLanguage.CSharp, new string[] {
-                        "AdicionaListaEventos"});
+                    "iltros\r\n\tPara obter uma lista filtrada dos eventos da Vaivoa", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -54,27 +53,27 @@ namespace SpecFlowApiTest.Features.Eventos
             testRunner = null;
         }
         
-        public virtual void TestInitialize()
+        public void TestInitialize()
         {
         }
         
-        public virtual void TestTearDown()
+        public void TestTearDown()
         {
             testRunner.OnScenarioEnd();
         }
         
-        public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
+        public void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
             testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
-        public virtual void ScenarioStart()
+        public void ScenarioStart()
         {
             testRunner.OnScenarioStart();
         }
         
-        public virtual void ScenarioCleanup()
+        public void ScenarioCleanup()
         {
             testRunner.CollectScenarioErrors();
         }
@@ -102,28 +101,18 @@ namespace SpecFlowApiTest.Features.Eventos
         [Xunit.InlineDataAttribute("2022-10-01", "2022-10-15", "15", new string[0])]
         [Xunit.InlineDataAttribute("2022-10-15", "2022-10-31", "8", new string[0])]
         [Xunit.InlineDataAttribute("2022-10-16", "2022-10-19", "0", new string[0])]
-        public virtual void ListarTodosOsEventosUtilizandoFiltroDeDatas(string dataInicio, string dataFim, string numEventos, string[] exampleTags)
+        public void ListarTodosOsEventosUtilizandoFiltroDeDatas(string dataInicio, string dataFim, string numEventos, string[] exampleTags)
         {
             string[] tagsOfScenario = exampleTags;
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             argumentsOfScenario.Add("dataInicio", dataInicio);
             argumentsOfScenario.Add("dataFim", dataFim);
             argumentsOfScenario.Add("numEventos", numEventos);
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Listar todos os eventos utilizando filtro de datas", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Listar todos os eventos utilizando filtro de datas", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 12
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -155,25 +144,15 @@ this.FeatureBackground();
         [Xunit.SkippableFactAttribute(DisplayName="Listar todos eventos filtrado por tipo de evento que existe")]
         [Xunit.TraitAttribute("FeatureTitle", "Listar eventos da agenda")]
         [Xunit.TraitAttribute("Description", "Listar todos eventos filtrado por tipo de evento que existe")]
-        public virtual void ListarTodosEventosFiltradoPorTipoDeEventoQueExiste()
+        public void ListarTodosEventosFiltradoPorTipoDeEventoQueExiste()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Listar todos eventos filtrado por tipo de evento que existe", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Listar todos eventos filtrado por tipo de evento que existe", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 24
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -205,25 +184,15 @@ this.FeatureBackground();
         [Xunit.SkippableFactAttribute(DisplayName="Tentar listar todos eventos filtrado por tipo de evento que não existe")]
         [Xunit.TraitAttribute("FeatureTitle", "Listar eventos da agenda")]
         [Xunit.TraitAttribute("Description", "Tentar listar todos eventos filtrado por tipo de evento que não existe")]
-        public virtual void TentarListarTodosEventosFiltradoPorTipoDeEventoQueNaoExiste()
+        public void TentarListarTodosEventosFiltradoPorTipoDeEventoQueNaoExiste()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tentar listar todos eventos filtrado por tipo de evento que não existe", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Tentar listar todos eventos filtrado por tipo de evento que não existe", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 31
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }

@@ -42,7 +42,7 @@ namespace SpecFlowApiTest.StepDefinitions.EventosSteps
             var restResponse = await restClient.ExecuteAsync(restRequest);
 
 
-            var bodyResponse = JsonConvert.DeserializeObject<SucessoDto<CadastroEventoRequestDto>>(restResponse.Content);
+            var bodyResponse = JsonConvert.DeserializeObject<SucessoDto<CadastroEventoResponseDto>>(restResponse.Content);
 
             Assert.True(bodyResponse.Sucesso);
             Assert.Equal(201, (int)restResponse.StatusCode);
@@ -54,6 +54,17 @@ namespace SpecFlowApiTest.StepDefinitions.EventosSteps
         [Given(@"que quero '([^']*)' esse evento com usuario diferente do que criou")]
         public void GivenQueQueroEsseEventoComUsuarioDiferenteDoQueCriou(string acao)
         {
+            var id = (Guid)_scenarioContext["EventoId"];
+
+            if (acao == "finalizar")
+            {
+                _scenarioContext["Rota"] = $"eventos/{id}/finalizar";
+            }
+            else
+            {
+                _scenarioContext["Rota"] = $"eventos/{id}";
+            }
+
             _featureContext["token"] = Utils.BuscaTokenValido(nameof(Configs.TokenB));
         }
 
@@ -203,7 +214,16 @@ namespace SpecFlowApiTest.StepDefinitions.EventosSteps
         [Given(@"que quero editar o evento com dados validos")]
         public void GivenQueQueroEditarOEventoComDadosValidos()
         {
-            var eventoValido = new EventoDtoBuilder().Build();
+            var response = (CadastroEventoResponseDto)_scenarioContext["ResponseBody"];
+            var id = (Guid)_scenarioContext["EventoId"];
+            _scenarioContext["Rota"] = $"eventos/{id}";
+
+            var eventoValido = new EventoDtoBuilder()
+                .Titulo("Teste automatizado - evento valido editado")
+                .Descricao("Teste automatizado - evento editado com sucesso")
+                .DataInicio(response.Inicio)
+                .DataFim(response.Fim)
+                .Build();
 
             _scenarioContext["DataBody"] = eventoValido;
         }
@@ -211,6 +231,9 @@ namespace SpecFlowApiTest.StepDefinitions.EventosSteps
         [Given(@"que quero editar o evento passando um tipo que nao existe")]
         public void GivenQueQueroEditarOEventoPassandoUmTipoQueNaoExiste()
         {
+            var id = (Guid)_scenarioContext["EventoId"];
+            _scenarioContext["Rota"] = $"eventos/{id}";
+
             var eventoValido = new EventoDtoBuilder().TipoEventoId(Guid.NewGuid().ToString()).Build();
 
             _scenarioContext["DataBody"] = eventoValido;
@@ -219,9 +242,14 @@ namespace SpecFlowApiTest.StepDefinitions.EventosSteps
         [Given(@"que quero editar o evento para um horario já ocupado")]
         public void GivenQueQueroEditarOEventoParaUmHorarioJaOcupado()
         {
-            var responseAdicao = (CadastroEventoRequestDto)_scenarioContext["ResponseBody"];
+            var id = (Guid)_scenarioContext["EventoId"];
+            _scenarioContext["Rota"] = $"eventos/{id}";
 
-            var eventoValido = new EventoDtoBuilder().DataInicio(responseAdicao.Inicio!).DataFim(responseAdicao.Fim!).Build();
+            var eventoValido = new EventoDtoBuilder()
+                .Titulo("Teste automatizado - evento editado conflitante de horario")
+                .DataInicio("2022-05-24 13:00")
+                .DataFim("2022-05-24 14:00")
+                .Build();
 
             _scenarioContext["DataBody"] = eventoValido;
         }
@@ -229,10 +257,13 @@ namespace SpecFlowApiTest.StepDefinitions.EventosSteps
         [Given(@"que quero editar uma evento que não existe na agenda")]
         public void GivenQueQueroEditarUmaEventoQueNaoExisteNaAgenda()
         {
+
+            var id = Guid.NewGuid().ToString();
+            _scenarioContext["Rota"] = $"eventos/{id}";
+
             var eventoValido = new EventoDtoBuilder().Build();
 
             _scenarioContext["DataBody"] = eventoValido;
-            _scenarioContext["EventoId"] = Guid.NewGuid().ToString();
         }
 
         #endregion

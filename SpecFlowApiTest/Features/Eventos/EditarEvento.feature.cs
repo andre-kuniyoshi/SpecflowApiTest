@@ -24,7 +24,7 @@ namespace SpecFlowApiTest.Features.Eventos
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = ((string[])(null));
+        private static string[] featureTags = ((string[])(null));
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
@@ -41,7 +41,7 @@ namespace SpecFlowApiTest.Features.Eventos
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("pt-br"), "Features/Eventos", "Editar evento", "\tComo Usuário/Administrador \r\n\tQuero poder editar um evento já agendado\r\n\tPara qu" +
-                    "e suas informacoes sejam alterados na agenda da Vaivoa", ProgrammingLanguage.CSharp, ((string[])(null)));
+                    "e suas informacoes sejam alterados na agenda da Vaivoa", ProgrammingLanguage.CSharp, featureTags);
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -51,27 +51,27 @@ namespace SpecFlowApiTest.Features.Eventos
             testRunner = null;
         }
         
-        public virtual void TestInitialize()
+        public void TestInitialize()
         {
         }
         
-        public virtual void TestTearDown()
+        public void TestTearDown()
         {
             testRunner.OnScenarioEnd();
         }
         
-        public virtual void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
+        public void ScenarioInitialize(TechTalk.SpecFlow.ScenarioInfo scenarioInfo)
         {
             testRunner.OnScenarioInitialize(scenarioInfo);
             testRunner.ScenarioContext.ScenarioContainer.RegisterInstanceAs<Xunit.Abstractions.ITestOutputHelper>(_testOutputHelper);
         }
         
-        public virtual void ScenarioStart()
+        public void ScenarioStart()
         {
             testRunner.OnScenarioStart();
         }
         
-        public virtual void ScenarioCleanup()
+        public void ScenarioCleanup()
         {
             testRunner.CollectScenarioErrors();
         }
@@ -96,25 +96,15 @@ namespace SpecFlowApiTest.Features.Eventos
         [Xunit.SkippableFactAttribute(DisplayName="Editar um evento com dados validos")]
         [Xunit.TraitAttribute("FeatureTitle", "Editar evento")]
         [Xunit.TraitAttribute("Description", "Editar um evento com dados validos")]
-        public virtual void EditarUmEventoComDadosValidos()
+        public void EditarUmEventoComDadosValidos()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento com dados validos", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento com dados validos", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 12
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -143,25 +133,15 @@ this.FeatureBackground();
         [Xunit.SkippableFactAttribute(DisplayName="Editar um evento passando um tipo evento que nao existe")]
         [Xunit.TraitAttribute("FeatureTitle", "Editar evento")]
         [Xunit.TraitAttribute("Description", "Editar um evento passando um tipo evento que nao existe")]
-        public virtual void EditarUmEventoPassandoUmTipoEventoQueNaoExiste()
+        public void EditarUmEventoPassandoUmTipoEventoQueNaoExiste()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento passando um tipo evento que nao existe", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento passando um tipo evento que nao existe", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -181,7 +161,7 @@ this.FeatureBackground();
  testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 22
- testRunner.Then("retorna uma resposta com o status igual a \'BadResquest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then("retorna uma resposta com o status igual a \'BadRequest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
 #line 23
  testRunner.And("com o campo sucesso do body da resposta igual a \'false\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -193,25 +173,15 @@ this.FeatureBackground();
         [Xunit.SkippableFactAttribute(DisplayName="Editar um evento que não foi vc que cadastrou")]
         [Xunit.TraitAttribute("FeatureTitle", "Editar evento")]
         [Xunit.TraitAttribute("Description", "Editar um evento que não foi vc que cadastrou")]
-        public virtual void EditarUmEventoQueNaoFoiVcQueCadastrou()
+        public void EditarUmEventoQueNaoFoiVcQueCadastrou()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento que não foi vc que cadastrou", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento que não foi vc que cadastrou", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 25
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -231,7 +201,7 @@ this.FeatureBackground();
  testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 29
- testRunner.Then("retorna uma resposta com o status igual a \'BadResquest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then("retorna uma resposta com o status igual a \'BadRequest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
 #line 30
  testRunner.And("com o campo sucesso do body da resposta igual a \'false\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -243,25 +213,15 @@ this.FeatureBackground();
         [Xunit.SkippableFactAttribute(DisplayName="Editar um evento que já foi finalizado")]
         [Xunit.TraitAttribute("FeatureTitle", "Editar evento")]
         [Xunit.TraitAttribute("Description", "Editar um evento que já foi finalizado")]
-        public virtual void EditarUmEventoQueJaFoiFinalizado()
+        public void EditarUmEventoQueJaFoiFinalizado()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento que já foi finalizado", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento que já foi finalizado", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 32
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -284,7 +244,7 @@ this.FeatureBackground();
  testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 37
- testRunner.Then("retorna uma resposta com o status igual a \'BadResquest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then("retorna uma resposta com o status igual a \'BadRequest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
 #line 38
  testRunner.And("com o campo sucesso do body da resposta igual a \'false\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -296,25 +256,15 @@ this.FeatureBackground();
         [Xunit.SkippableFactAttribute(DisplayName="Editar um evento que não existe na agenda")]
         [Xunit.TraitAttribute("FeatureTitle", "Editar evento")]
         [Xunit.TraitAttribute("Description", "Editar um evento que não existe na agenda")]
-        public virtual void EditarUmEventoQueNaoExisteNaAgenda()
+        public void EditarUmEventoQueNaoExisteNaAgenda()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento que não existe na agenda", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento que não existe na agenda", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 40
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -331,10 +281,7 @@ this.FeatureBackground();
  testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 43
- testRunner.Then("retorna uma resposta com o status igual a \'BadResquest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
-#line hidden
-#line 44
- testRunner.And("com o campo sucesso do body da resposta igual a \'false\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
+ testRunner.Then("retorna uma resposta com o status igual a \'NotFound\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -343,25 +290,15 @@ this.FeatureBackground();
         [Xunit.SkippableFactAttribute(DisplayName="Editar um evento para um horario ja reservado")]
         [Xunit.TraitAttribute("FeatureTitle", "Editar evento")]
         [Xunit.TraitAttribute("Description", "Editar um evento para um horario ja reservado")]
-        public virtual void EditarUmEventoParaUmHorarioJaReservado()
+        public void EditarUmEventoParaUmHorarioJaReservado()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento para um horario ja reservado", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 46
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento para um horario ja reservado", null, tagsOfScenario, argumentsOfScenario, featureTags);
+#line 45
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -370,6 +307,9 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 8
 this.FeatureBackground();
+#line hidden
+#line 46
+ testRunner.Given("que tenho um evento já agendado para o dia \'24\' para ser \'editado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 47
  testRunner.Given("que tenho um evento já agendado para o dia \'25\' para ser \'editado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
@@ -381,7 +321,7 @@ this.FeatureBackground();
  testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
 #line hidden
 #line 50
- testRunner.Then("retorna uma resposta com o status igual a \'BadResquest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
+ testRunner.Then("retorna uma resposta com o status igual a \'BadRequest\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
 #line 51
  testRunner.And("com o campo sucesso do body da resposta igual a \'false\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
@@ -393,25 +333,15 @@ this.FeatureBackground();
         [Xunit.SkippableFactAttribute(DisplayName="Editar um evento que não pertence ao usuario que criou")]
         [Xunit.TraitAttribute("FeatureTitle", "Editar evento")]
         [Xunit.TraitAttribute("Description", "Editar um evento que não pertence ao usuario que criou")]
-        public virtual void EditarUmEventoQueNaoPertenceAoUsuarioQueCriou()
+        public void EditarUmEventoQueNaoPertenceAoUsuarioQueCriou()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento que não pertence ao usuario que criou", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Editar um evento que não pertence ao usuario que criou", null, tagsOfScenario, argumentsOfScenario, featureTags);
 #line 53
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
+            if ((TagHelper.ContainsIgnoreTag(tagsOfScenario) || TagHelper.ContainsIgnoreTag(featureTags)))
             {
                 testRunner.SkipScenario();
             }
@@ -422,15 +352,18 @@ this.ScenarioInitialize(scenarioInfo);
 this.FeatureBackground();
 #line hidden
 #line 54
- testRunner.Given("que tenho um evento já agendado para o dia \'24\' para ser \'editado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
+ testRunner.Given("que tenho um evento já agendado para o dia \'26\' para ser \'editado\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Dado ");
 #line hidden
 #line 55
  testRunner.And("que quero \'editar\' esse evento com usuario diferente do que criou", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 56
- testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+ testRunner.And("que quero editar o evento com dados validos", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "E ");
 #line hidden
 #line 57
+ testRunner.When("faco a requisição", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Quando ");
+#line hidden
+#line 58
  testRunner.Then("retorna uma resposta com o status igual a \'Forbidden\'", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Entao ");
 #line hidden
             }
